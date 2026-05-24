@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajasthan Police</title>
+  <style>
+    body {
+      background-color: blanchedalmond;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .header {
+      background-color: rgba(139, 130, 26, 0.748);
+      color: #000000;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .rp-logo {
+      width: 100px; /* Adjust the size of the logo as needed */
+    }
+    .container {
+      margin: 20px;
+    }
+    #define-crime {
+      width: 100%;
+      height: 100px;
+      resize: none;
+    }
+    .footer {
+      background-color: rgba(139, 130, 26, 0.748);
+      color: #fff;
+      padding: 10px 20px;
+      position:relative;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    #main {
+      background-color: rgba(139, 130, 26, 0.748);
+      color: black;
+      width: 150px;
+      height: 50px;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    h1 {
+      margin-right: 2px;
+      text-decoration: underline;
+    }
+    p {
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    #contact {
+      text-align: center;
+      background-color: rgba(139, 130, 26, 0.748);
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#main").click(function(){
+        var sentence = $("#inputbox").val();
+        $.ajax({
+          url: "/analyze",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({sentence: sentence}),
+          success: function(response) {
+            $("#define-crime").val(response.join("\n"));
+          },
+          error: function(error) {
+            console.log("Error:", error);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+
+<div class="header">
+  <img class="rp-logo" src="https://upload.wikimedia.org/wikipedia/en/c/c4/Rajasthan_Police_Logo.png" alt="Rajasthan Police Logo">
+  <h1>Rajasthan Police</h1>
+  <img src="https://i.pinimg.com/originals/ea/14/0a/ea140a9f6e4681b64b35262cf873f026.png" width="120px" alt="Indian Flag">
+</div>
+
+<div class="container">
+  <h2>Describe the incident:</h2>
+  <textarea id="inputbox" rows="10" style="width: 100%; height: 130px"></textarea>
+  <button type="submit" id="main" style="margin-left: 650px;">Analyze</button>
+</div>
+
+<div class="container">
+  <h2>Applicable Sections of IPC:</h2>
+  <textarea id="define-crime" rows="5"></textarea>
+</div>
+
+<p><b><i> < Rajasthan Police: Always Committed To Serve > </Rajasthan></i></b></p>
+
+<div class="footer">
+  <button style="width: 150px; height: 50px; font-size: 15px;"><a href="https://police.rajasthan.gov.in/">Contact Us</a></button>
+  <textarea id="feedback" rows="3" placeholder="Enter your feedback" style="width: 400px; height: 50px; margin-left: 700px;"></textarea>
+  <button type="submit" style="width: 150px; height: 50px;">Submit Feedback</button>
+</div>
+
+<div id="contact">
+  <h1>Emergency Contacts</h1>
+  <ul>
+    <li>Police Control Room - 100</li>
+    <li>Traffic Police - 1095</li>
+    <li>Women & Sr. Citizens - 1090</li>
+    <li>Fire Brigade - 101</li>
+    <li>Ambulance - 102</li>
+    <li>Emergency Services - 108</li>
+    <li>Cyber Crime - 1930</li>
+    <li>Child Helpline - 1098</li>
+    <li>Sampark 181 Helpline - 181</li>
+    <li>ACB - 1064</li>
+    <li>Help for SC/ST (Toll Free) - 18001806025 / 18002021989 / 14566</li>
+  </ul>
+</div>
+
+</body>
+</html>
